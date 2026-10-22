@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stichting Lezeren</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <a href="index.html">
+      <img src="images/lezeren.png" alt="Stichting Lezeren" class="logo">
+    </a>
+    
+    <!-- NAVIGATION USING IMAGES -->
+    <nav aria-label="Hoofdnavigatie">
+      <!-- Triggers Algemene Informatie Popup -->
+      <button onclick="openModal('modal-algemeen')">
+        <img src="images/algemene-informatie.png" alt="Algemene informatie">
+      </button>
+
+      <!-- Triggers Projecten Popup -->
+      <button onclick="openModal('modal-projecten')">
+        <img src="images/projecten.png" alt="Projecten">
+      </button>     
+      
+      <!-- Triggers Documenten Popup -->
+      <button onclick="openModal('modal-documenten')">
+        <img src="images/plan.png" alt="Documenten">
+      </button>
+      
+      <!-- Triggers Verslagen Popup -->
+      <button onclick="openModal('modal-verslagen')">
+        <img src="images/verslagen.png" alt="Verslagen">
+      </button>      
+      
+      <!-- Triggers Nieuwsbrief Popup -->
+      <button onclick="openModal('modal-nieuwsbrief')">
+        <img src="images/nieuwsbrief.png" alt="Nieuwsbrief">
+      </button>
+
+      <!-- Direct Link to YouTube -->
+      <a href="https://www.youtube.com/c/alfabravonederlands" target="_blank" rel="noopener">
+        <img src="images/alfa-bravo-nederlands.png" alt="YouTube Alfa Bravo Nederlands">
+      </a>
+
+      <!-- Triggers Contact Popup -->
+      <button onclick="openModal('modal-contact')">
+        <img src="images/contact.png" alt="Contact">
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 3D Spinning Word Cloud -->
+    <div class="cloud-container">
+      <div id="cloud">
+        <div class="cloud-tag"><img src="images/knutselen.png" alt="knutselen"></div>
+        <div class="cloud-tag"><img src="images/kabbelen.png" alt="kabbelen"></div>
+        <div class="cloud-tag"><img src="images/wapperen.png" alt="wapperen"></div>
+        <div class="cloud-tag"><img src="images/huppelen.png" alt="huppelen"></div>
+        <div class="cloud-tag"><img src="images/flapperen.png" alt="flapperen"></div>
+        <div class="cloud-tag"><img src="images/tjotteren.png" alt="tjotteren"></div>
+        <div class="cloud-tag"><img src="images/enzovoorts.png" alt="enzovoorts" class="enz-img"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Using c-2026.png for copyright -->
+    <img src="images/c-2026.png" alt="Copyright 2026" class="copyright-img">
+  </footer>
+
+</div>
+
+<!-- ========================================== -->
+<!-- MODALS / POPUPS                            -->
+<!-- ========================================== -->
+
+<!-- Modal 1: Algemene Informatie -->
+<div id="modal-algemeen" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/doelstelling.png" alt="Doelstelling" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    <p style="text-align: left;">Stichting Lezeren heeft ten doel het geven van taalcursussen, het ontwikkelen van lesmateriaal en het organiseren van creatieve projecten welke gerelateerd zijn aan taal, teneinde contacten tussen mensen en sociale cohesie in de maatschappij te bevorderen.</p>
+    <p style="text-align: left;">Stichting Lezeren is op 10 mei 2023 opgericht door Francien van Everdingen en Florian Cramer.</p>
+
+    <img src="images/bestuur.png" alt="Bestuur" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    <ul class="board" style="text-align: left;">
+      <li>Florian Cramer — <span class="role">voorzitter (onbezoldigd)</span></li>
+      <li>Francien van Everdingen — <span class="role">secretaris en penningmeester (onbezoldigd)</span></li>
+      <li>Janpier Brands — <span class="role">algemeen bestuurslid (onbezoldigd)</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Modal 2: Projecten -->
+<div id="modal-projecten" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/projecten.png" alt="Projecten" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    
+    <img src="images/taalpingpong.png" alt="Taalpingpong" style="max-height: 80px; margin: 1.5rem auto 1rem; display: block;">
+    <p style="text-align: left;">“Taalpingpong” is een boek waar veel cursisten direkt verliefd op worden. Het boek is vooral geschikt om de spreekvaardigheid mee te oefenen. We hebben exemplaren om uit te lenen aan cursisten die daar enthousiast over zijn.</p>
+    
+    <img src="images/borduren-voor-boeken.png" alt="Borduren" style="max-height: 80px; margin: 1.5rem auto 1rem; display: block;">
+    <p style="text-align: left;">“Borduren voor Boeken” is een prachtig project waar veel buurtbewoners en cursisten direct enthousiast over zijn. Het is niet alleen heel gezellig, maar ook ontzettend leerzaam. We brengen hiermee vrouwen uit de wijk en van de asielboten samen.</p>
+  </div>
+</div>
+
+<!-- Modal 3: Documenten -->
+<div id="modal-documenten" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/plan.png" alt="Plan" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    
+    <div class="year-grid">
+      <!-- <a href="#"><img src="images/2023.png" alt="2023"></a> -->
+      <!-- <a href="#"><img src="images/2024.png" alt="2024"></a> -->
+      <a href="images/beleidsplan_2025.pdf" target="_blank"><img src="images/2025.png" alt="2025"></a>
+      <!-- <a href="#"><img src="images/2026.png" alt="2026"></a> -->
+      <!-- <a href="#"><img src="images/2027.png" alt="2027"></a> -->
+      <!-- <a href="#"><img src="images/2028.png" alt="2028"></a> -->
+      <!-- <a href="#"><img src="images/2029.png" alt="2029"></a> -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4: Verslagen -->
+<div id="modal-verslagen" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/verslagen.png" alt="Verslagen" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    
+    <div class="year-grid">
+      <a href="images/stichting_lezeren-jaarverslag_2023.pdf" target="_blank" title="Jaarverslag 2023"><img src="images/2023.png" alt="2023"></a>
+      <a href="images/stichting_lezeren-jaarverslag_2024.pdf" target="_blank" title="Jaarverslag 2024"><img src="images/2024.png" alt="2024"></a>
+      <a href="images/stichting_lezeren-jaarverslag_2025.pdf" target="_blank" title="Jaarverslag 2025"><img src="images/2025.png" alt="2025"></a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5: Nieuwsbrief -->
+<div id="modal-nieuwsbrief" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/nieuwsbrief.png" alt="Nieuwsbrief" style="max-height: 90px; margin: 0 auto 1.5rem; display: block;">
+    <p>Wilt u ook de nieuwsbrief ontvangen?</p>
+    <p style="margin-top: 2rem; font-size: 1.2rem;">
+      Stuur een e-mail naar:<br>
+      <a href="mailto:stichtinglezeren@gmail.com?subject=Aanmelding%20nieuwsbrief" style="font-weight: bold;">stichtinglezeren@gmail.com</a>
+    </p>
+  </div>
+</div>
+
+<!-- Modal 6: Contact -->
+<div id="modal-contact" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(event)">&times;</button>
+    
+    <img src="images/contact.png" alt="Contact" style="max-height: 90px; margin: 0 auto 1.5rem; display: block;">
+    <h2 style="margin-bottom: 2rem;">Stichting Lezeren</h2>
+    
+    <p style="margin-bottom: 0.5rem; font-size: 1.1rem;"><strong>KvK:</strong> 90194578</p>
+    <p style="margin-bottom: 0.5rem; font-size: 1.1rem;"><strong>BTW-nummer:</strong> NL865237724B01</p>
+    
+    <p style="margin: 2rem 0 0.5rem 0; font-size: 1.1rem;"><strong>IBAN:</strong><br>NL 17 TRIO 0320689395</p>
+    
+    <p style="margin-top: 2rem; font-size: 1.2rem;">
+      <a href="mailto:stichtinglezeren@gmail.com" style="font-weight: bold;">stichtinglezeren@gmail.com</a>
+    </p>
+  </div>
+</div>
+
+<!-- JavaScript for Modals & 3D Word Cloud -->
+<script>
+  // ==========================================
+  // 3D SPINNING WORD CLOUD LOGIC
+  // ==========================================
+  const container = document.getElementById('cloud');
+  const tags = Array.from(container.getElementsByClassName('cloud-tag'));
+  const radius = 120; 
+  let angleX = 0.005, angleY = 0.005;
+  let isPaused = false;
+
+  const numTags = tags.length;
+  tags.forEach((tag, i) => {
+    const phi = Math.acos(-1 + (2 * i) / numTags);
+    const theta = Math.sqrt(numTags * Math.PI) * phi;
+    
+    tag.x = radius * Math.cos(theta) * Math.sin(phi);
+    tag.y = radius * Math.sin(theta) * Math.sin(phi);
+    tag.z = radius * Math.cos(phi);
+    
+    tag.addEventListener('mouseenter', () => isPaused = true);
+    tag.addEventListener('mouseleave', () => isPaused = false);
+  });
+
+  function rotateCloud() {
+    if (!isPaused) {
+      tags.forEach(tag => {
+        const y1 = tag.y * Math.cos(angleX) - tag.z * Math.sin(angleX);
+        const z1 = tag.z * Math.cos(angleX) + tag.y * Math.sin(angleX);
+        tag.y = y1;
+        tag.z = z1;
+
+        const x2 = tag.x * Math.cos(angleY) - tag.z * Math.sin(angleY);
+        const z2 = tag.z * Math.cos(angleY) + tag.x * Math.sin(angleY);
+        tag.x = x2;
+        tag.z = z2;
+      });
+    }
+
+    tags.forEach(tag => {
+      const scale = 300 / (300 - tag.z); 
+      const left = tag.x * scale;
+      const top = tag.y * scale;
+      tag.style.transform = `translate(-50%, -50%) translate(${left}px, ${top}px) scale(${scale})`;
+      tag.style.opacity = Math.max(0.2, scale - 0.2);
+      tag.style.zIndex = Math.floor(scale * 100);
+    });
+
+    requestAnimationFrame(rotateCloud);
+  }
+
+  if (container) {
+    rotateCloud();
+  }
+
+  // ==========================================
+  // MODAL LOGIC
+  // ==========================================
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+    }
+  }
+
+  function closeModal(event) {
+    if (event.target.classList.contains('modal-overlay') || event.target.classList.contains('close-btn')) {
+      const modal = event.target.closest('.modal-overlay');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; 
+      }
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const activeModals = document.querySelectorAll('.modal-overlay.active');
+      activeModals.forEach(modal => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
