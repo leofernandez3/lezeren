@@ -1,0 +1,232 @@
+/* ============================================
+   Stichting Lezeren — shared stylesheet
+   ============================================ */
+
+:root {
+  --fg: #111111;
+  --muted: #666666;
+  --rule: #e5e5e5;
+  --maxw: 1400px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--fg);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  
+  /* ONE BIG BACKGROUND - No Repeat */
+  background-image: url('../images/bg-horizontal.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Switch to vertical background on mobile and vertical tablets */
+@media (max-width: 1024px) and (orientation: portrait) {
+  body {
+    background-image: url('../images/bg-vertical.jpg');
+  }
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 2rem auto;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+/* ---------- Header & Nav ---------- */
+header { 
+  margin-bottom: 3rem; 
+  text-align: center;
+}
+
+.logo {
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 3rem;
+}
+
+/* Updated Nav to handle image buttons */
+nav { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  padding: 1rem 0;
+}
+
+nav button, nav a {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav button:hover, nav a:hover { 
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Nav image sizing */
+nav button img, nav a img {
+  height: 95px; 
+  width: auto;
+  object-fit: contain;
+}
+
+/* ---------- Spinning 3D Word Cloud ---------- */
+.cloud-container {
+  position: relative;
+  width: 100%;
+  height: 350px; 
+  margin: 2rem 0;
+  overflow: hidden;
+}
+
+#cloud {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* The items inside the cloud */
+.cloud-tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  transition: filter 0.2s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.cloud-tag img {
+  height: 40px; 
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.cloud-tag img.enz-img {
+  height: 25px;
+  opacity: 0.8;
+}
+
+/* ---------- Page Content ---------- */
+section { text-align: center; }
+h2 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.5rem; }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 1.8rem 0 0.5rem; }
+p { margin: 0 auto 1.1rem; max-width: 60ch; }
+a { color: var(--fg); text-underline-offset: 0.18em; }
+
+/* ---------- Document Grid ---------- */
+.year-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.year-grid img {
+  max-height: 45px;
+  width: auto;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.year-grid img:hover { transform: scale(1.1); }
+
+.board { list-style: none; padding: 0; margin: 0 auto 1.1rem; }
+.board li { margin-bottom: 0.5rem; }
+.board .role { color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- MODALS (Popups) ---------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 4px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+.close-btn:hover { color: var(--fg); }
+
+/* ---------- Footer ---------- */
+footer {
+  margin-top: 5rem;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copyright-img {
+  height: 85px;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .wrap { margin: 1rem; padding: 1rem; }
+  nav { flex-direction: column; gap: 1rem; }
+  nav button img, nav a img { height: 60px; }
+  .cloud-container { height: 250px; }
+  .cloud-tag img { height: 30px; }
+  .cloud-tag img.enz-img { height: 20px; }
+  .modal-content { padding: 1.5rem; width: 95%; }
+}
