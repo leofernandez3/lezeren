@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stichting Lezeren</title>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div class="scattered-nav">
+
+  <a href="index.html" class="scattered-item logo-item" style="top: 40%; left: 35%; ">
+    <img src="images/logo.png" alt="Stichting Lezeren">
+  </a>
+
+  <button class="scattered-item" onclick="openModal('modal-algemeen')" style="top: 12%; left: 8%;">
+    <img src="images/algemene-informatie.png" alt="Algemene informatie">
+  </button>
+
+  <button class="scattered-item" onclick="openModal('modal-verslagen')" style="top: 18%; right: 12%;">
+    <img src="images/verslagen.png" alt="Verslagen">
+  </button>      
+
+  <a href="https://www.youtube.com/c/alfabravonederlands" target="_blank" rel="noopener" class="scattered-item" style="bottom: 20%; left: 15%;">
+    <img src="images/alfa-bravo-nederlands.png" alt="YouTube Alfa Bravo Nederlands">
+  </a>
+
+  <button class="scattered-item" onclick="openModal('modal-contact')" style="bottom: 35%; right: 15%;">
+    <img src="images/contact.png" alt="Contact">
+  </button>
+
+</div>
+
+<footer class="fixed-footer">
+  <img src="images/c-2026.png" alt="Copyright 2026">
+</footer>
+
+<div id="modal-algemeen" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(this)">&times;</button>
+    
+    <img src="images/doelstelling.png" alt="Doelstelling" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    <p style="text-align: left;">Stichting Lezeren had ten doel het geven van taalcursussen, het ontwikkelen van lesmateriaal en het organiseren van creatieve projecten welke gerelateerd zijn aan taal, teneinde contacten tussen mensen en sociale cohesie in de maatschappij te bevorderen.</p>
+    <p style="text-align: left;">Stichting Lezeren is op 10 mei 2023 opgericht door Francien van Everdingen en Florian Cramer, en is opgehouden te bestaan eind 2026.</p>
+
+    <img src="images/bestuur.png" alt="Bestuur" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    <ul class="board" style="text-align: left;">
+      <li>Florian Cramer — <span class="role">voorzitter (onbezoldigd)</span></li>
+      <li>Francien van Everdingen — <span class="role">secretaris en penningmeester (onbezoldigd)</span></li>
+      <li>Janpier Brands — <span class="role">algemeen bestuurslid (onbezoldigd)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div id="modal-verslagen" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(this)">&times;</button>
+    
+    <img src="images/verslagen.png" alt="Verslagen" style="max-height: 90px; margin: 1.5rem auto 1rem; display: block;">
+    
+    <div class="year-grid">
+      <a href="images/stichting_lezeren-jaarverslag_2023.pdf" target="_blank" title="Jaarverslag 2023"><img src="images/2023.png" alt="2023"></a>
+      <a href="images/stichting_lezeren-jaarverslag_2024.pdf" target="_blank" title="Jaarverslag 2024"><img src="images/2024.png" alt="2024"></a>
+      <a href="images/stichting_lezeren-jaarverslag_2025.pdf" target="_blank" title="Jaarverslag 2025"><img src="images/2025.png" alt="2025"></a>
+      <a href="#" target="_blank" title="Jaarverslag 2026"><img src="images/2026.png" alt="2026"></a>      
+    </div>
+  </div>
+</div>
+
+<div id="modal-contact" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal(this)">&times;</button>
+    
+    <img src="images/contact.png" alt="Contact" style="max-height: 90px; margin: 0 auto 1.5rem; display: block;">
+    <h2 style="margin-bottom: 2rem;">Stichting Lezeren</h2>
+    
+    <p style="margin-bottom: 0.5rem; font-size: 1.1rem;"><strong>KvK:</strong> 90194578</p>
+    <p style="margin-bottom: 0.5rem; font-size: 1.1rem;"><strong>BTW-nummer:</strong> NL865237724B01</p>
+    
+    <p style="margin-top: 2rem; font-size: 1.2rem;">
+      <a href="mailto:stichtinglezeren@gmail.com" style="font-weight: bold;">stichtinglezeren@gmail.com</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+    }
+  }
+
+  function closeModal(buttonElement) {
+    const modal = buttonElement.closest('.modal-overlay');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; 
+    }
+  }
+
+  function closeModalOnOverlay(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+      event.target.classList.remove('active');
+      document.body.style.overflow = ''; 
+    }
+  }
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      const activeModals = document.querySelectorAll('.modal-overlay.active');
+      activeModals.forEach(modal => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
