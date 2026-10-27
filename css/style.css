@@ -90,44 +90,6 @@ nav button img, nav a img {
   object-fit: contain;
 }
 
-/* ---------- Spinning 3D Word Cloud ---------- */
-.cloud-container {
-  position: relative;
-  width: 100%;
-  height: 350px; 
-  margin: 2rem 0;
-  overflow: hidden;
-}
-
-#cloud {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* The items inside the cloud */
-.cloud-tag {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-origin: center center;
-  transition: filter 0.2s ease;
-  cursor: default;
-  user-select: none;
-}
-
-.cloud-tag img {
-  height: 40px; 
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-}
-
-.cloud-tag img.enz-img {
-  height: 25px;
-  opacity: 0.8;
-}
-
 /* ---------- Page Content ---------- */
 section { text-align: center; }
 h2 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.5rem; }
@@ -225,8 +187,77 @@ footer {
   .wrap { margin: 1rem; padding: 1rem; }
   nav { flex-direction: column; gap: 1rem; }
   nav button img, nav a img { height: 60px; }
-  .cloud-container { height: 250px; }
-  .cloud-tag img { height: 30px; }
-  .cloud-tag img.enz-img { height: 20px; }
   .modal-content { padding: 1.5rem; width: 95%; }
 }
+
+body {
+    position: relative;
+    overflow: hidden;
+    background-image: url('../images/bg-horizontal.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  
+  @media (max-width: 1024px) and (orientation: portrait) {
+    body {
+      background-image: url('../images/bg-vertical.jpg');
+    }
+  }
+
+
+  .scattered-nav {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+  }
+
+  .scattered-item {
+    position: absolute;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    z-index: 10;
+  }
+
+  .scattered-item:hover {
+    transform: scale(1.1) !important;
+    z-index: 20;
+    filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.8)); 
+  }
+
+  .scattered-item img {
+    height: auto;
+    
+    object-fit: contain;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.4));
+  }
+
+  
+  @media (max-width: 768px) {
+    .scattered-item img {
+      max-width: 150px;
+    }
+    .logo-item img {
+      max-width: 150px;
+    }
+  }
+
+  
+  .fixed-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+  
+  .fixed-footer img {
+    height: 70px;
+    width: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+  }
