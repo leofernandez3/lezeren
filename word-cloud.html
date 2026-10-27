@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stichting Lezeren</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  
+  body {
+    overflow: hidden; 
+    margin: 0;
+    padding: 0;
+    background-image: url('images/bg-horizontal.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  
+  @media (max-width: 1024px) and (orientation: portrait) {
+    body {
+      background-image: url('images/bg-vertical.jpg');
+    }
+  }
+
+  .landing-wrap {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .landing-cloud-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+  }
+
+  .landing-cloud-container #cloud {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+ 
+  .cloud-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+  }
+
+  
+  .landing-cloud-container .cloud-tag img {
+    height: 85px; 
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+  }
+
+  .landing-cloud-container .cloud-tag img.enz-img {
+    height: 55px; 
+    opacity: 0.8;
+  }
+
+  
+  @media (max-width: 768px) {
+    .landing-cloud-container .cloud-tag img {
+      height: 50px; 
+    }
+    .landing-cloud-container .cloud-tag img.enz-img {
+      height: 30px;
+    }
+  }
+
+  
+  .center-logo {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-40%, -50%); 
+    z-index: 1000;
+    transition: transform 0.3s ease, opacity 0.4s ease;
+    cursor: pointer;
+  }
+
+  .center-logo img {
+    width: 250px;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .center-logo img {
+      width: 150px; 
+    }
+    .center-logo {
+      padding: 0.5rem;
+    }
+  }
+
+  .center-logo:hover {
+    transform: translate(-50%, -50%) scale(1.05); 
+  }
+
+  
+  .fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="landing-wrap">
+
+  
+  <div class="landing-cloud-container">
+    <div id="cloud">
+      <div class="cloud-tag"><img src="images/knutselen.png" alt="knutselen"></div>
+      <div class="cloud-tag"><img src="images/kabbelen.png" alt="kabbelen"></div>
+      <div class="cloud-tag"><img src="images/wapperen.png" alt="wapperen"></div>
+      <div class="cloud-tag"><img src="images/huppelen.png" alt="huppelen"></div>
+      <div class="cloud-tag"><img src="images/flapperen.png" alt="flapperen"></div>
+      <div class="cloud-tag"><img src="images/tjotteren.png" alt="tjotteren"></div>
+      <div class="cloud-tag"><img src="images/enzovoorts.png" alt="enzovoorts" class="enz-img"></div>
+    </div>
+  </div>
+
+  
+  <a href="main-page.html" class="center-logo" id="enter-btn">
+    <img src="images/logo.png" alt="Enter Stichting Lezeren">
+  </a>
+
+</div>
+
+<script>
+  // ==========================================
+  // 3D SPINNING WORD CLOUD LOGIC
+  // ==========================================
+  const container = document.getElementById('cloud');
+  const tags = Array.from(container.getElementsByClassName('cloud-tag'));
+  
+  const baseRadius = 350; 
+  const minRadius = 200; // The "hole" around the logo
+  let angleX = 0.005, angleY = 0.005; 
+
+  // Distribute items on the sphere
+  const numTags = tags.length;
+  tags.forEach((tag, i) => {
+    const phi = Math.acos(-1 + (2 * i) / numTags);
+    const theta = Math.sqrt(numTags * Math.PI) * phi;
+    
+    tag.x = baseRadius * Math.cos(theta) * Math.sin(phi);
+    tag.y = baseRadius * Math.sin(theta) * Math.sin(phi);
+    tag.z = baseRadius * Math.cos(phi);
+  });
+
+  function rotateCloud() {
+    // Get the exact center of the window
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    let currentRadiusMultiplier = 1;
+    if (window.innerWidth < 768) {
+      currentRadiusMultiplier = 0.65; 
+    } else if (window.innerWidth < 1024) {
+      currentRadiusMultiplier = 0.85; 
+    }
+
+    // Rotate the 3D coordinates
+    tags.forEach(tag => {
+      const y1 = tag.y * Math.cos(angleX) - tag.z * Math.sin(angleX);
+      const z1 = tag.z * Math.cos(angleX) + tag.y * Math.sin(angleX);
+      tag.y = y1;
+      tag.z = z1;
+
+      const x2 = tag.x * Math.cos(angleY) - tag.z * Math.sin(angleY);
+      const z2 = tag.z * Math.cos(angleY) + tag.x * Math.sin(angleY);
+      tag.x = x2;
+      tag.z = z2;
+    });
+
+    // Render (Project 3D to 2D)
+    tags.forEach(tag => {
+      const scaledX = tag.x * currentRadiusMultiplier;
+      const scaledY = tag.y * currentRadiusMultiplier;
+      const scaledZ = tag.z * currentRadiusMultiplier;
+
+      const scale = 700 / (700 - scaledZ); 
+      
+      let left = scaledX * scale;
+      let top = scaledY * scale;
+      
+      // ==========================================
+      // EXCLUSION ZONE (Push words out from the logo)
+      // ==========================================
+      const distanceFromCenter = Math.sqrt(left*left + top*top);
+      const exclusionZone = window.innerWidth < 768 ? minRadius * 0.6 : minRadius;
+
+      if (distanceFromCenter < exclusionZone) {
+        const angle = Math.atan2(top, left);
+        left = Math.cos(angle) * exclusionZone;
+        top = Math.sin(angle) * exclusionZone;
+      }
+
+      // Final position: Center of screen + offset
+      const finalLeft = centerX + left;
+      const finalTop = centerY + top;
+      
+      // Apply transforms. 
+      // translate(-50%, -50%) ensures the image centers on its calculated coordinate.
+      tag.style.transform = `translate(-50%, -50%) translate(${finalLeft}px, ${finalTop}px) scale(${scale})`;
+      
+      tag.style.opacity = Math.max(0.2, scale - 0.3); 
+      tag.style.zIndex = Math.floor(scale * 100);
+    });
+
+    requestAnimationFrame(rotateCloud);
+  }
+
+  // Start animation
+  if (container) {
+    setTimeout(rotateCloud, 50);
+  }
+
+  // ==========================================
+  // PAGE TRANSITION LOGIC
+  // ==========================================
+  const enterBtn = document.getElementById('enter-btn');
+  
+  enterBtn.addEventListener('click', function(e) {
+    e.preventDefault(); 
+    const targetUrl = this.href;
+    
+    document.body.classList.add('fade-out');
+    
+    setTimeout(function() {
+      window.location.href = targetUrl;
+    }, 400);
+  });
+</script>
+
+</body>
+</html>

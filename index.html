@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stichting Lezeren</title>
+<title>Stichting Lezeren - Woorden</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-  
+  /* Base background */
   body {
-    overflow: hidden; 
+    overflow: hidden; /* Prevent scrolling */
     margin: 0;
     padding: 0;
     background-image: url('images/bg-horizontal.jpg');
@@ -18,7 +18,7 @@
     background-repeat: no-repeat;
   }
 
-  
+  /* Switch to vertical background on mobile and vertical tablets */
   @media (max-width: 1024px) and (orientation: portrait) {
     body {
       background-image: url('images/bg-vertical.jpg');
@@ -31,70 +31,69 @@
     height: 100vh;
   }
 
-  .landing-cloud-container {
+  /* Scattered words container */
+  .scattered-cloud {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    overflow: hidden;
   }
 
-  .landing-cloud-container #cloud {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
- 
-  .cloud-tag {
+  /* Individual words */
+  .scattered-word {
     position: absolute;
-    top: 0;
-    left: 0;
-    will-change: transform;
-  }
-
-  
-  .landing-cloud-container .cloud-tag img {
-    height: 85px; 
+    transform: translate(-50%, -50%);
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+    transition: top 0.5s ease, left 0.5s ease, opacity 0.5s ease;
   }
 
-  .landing-cloud-container .cloud-tag img.enz-img {
+  /* Word image sizing */
+  .scattered-word img {
+    height: 85px; 
+    width: auto;
+  }
+
+  .scattered-word.enz-img img {
     height: 55px; 
     opacity: 0.8;
   }
 
-  
+  /* Adjust sizes for phones/tablets */
   @media (max-width: 768px) {
-    .landing-cloud-container .cloud-tag img {
+    .scattered-word img {
       height: 50px; 
     }
-    .landing-cloud-container .cloud-tag img.enz-img {
+    .scattered-word.enz-img img {
       height: 30px;
     }
   }
 
-  
+  /* The center logo - No background, No border radius, Off-center */
   .center-logo {
     position: absolute;
-    top: 50vh;
-    left: 50vw;
-    transform: translate(-40%, -50%); 
+    top: 55%;   /* Moved slightly down */
+    left: 60%;  /* Moved slightly to the right */
+    transform: translate(-50%, -50%);
     z-index: 1000;
     transition: transform 0.3s ease, opacity 0.4s ease;
     cursor: pointer;
+    /* Removed background, border-radius, padding, and backdrop-filter */
   }
 
   .center-logo img {
     width: 250px;
     height: auto;
     display: block;
+    /* Added a stronger shadow so the logo stays readable without a background */
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
   }
 
   @media (max-width: 768px) {
     .center-logo img {
       width: 150px; 
     }
+    /* Adjust off-center position for mobile screens */
     .center-logo {
-      padding: 0.5rem;
+      top: 50%;
+      left: 50%;
     }
   }
 
@@ -102,7 +101,7 @@
     transform: translate(-50%, -50%) scale(1.05); 
   }
 
-  
+  /* Fade out animation class */
   .fade-out {
     opacity: 0;
     pointer-events: none;
@@ -114,20 +113,18 @@
 
 <div class="landing-wrap">
 
-  
-  <div class="landing-cloud-container">
-    <div id="cloud">
-      <div class="cloud-tag"><img src="images/knutselen.png" alt="knutselen"></div>
-      <div class="cloud-tag"><img src="images/kabbelen.png" alt="kabbelen"></div>
-      <div class="cloud-tag"><img src="images/wapperen.png" alt="wapperen"></div>
-      <div class="cloud-tag"><img src="images/huppelen.png" alt="huppelen"></div>
-      <div class="cloud-tag"><img src="images/flapperen.png" alt="flapperen"></div>
-      <div class="cloud-tag"><img src="images/tjotteren.png" alt="tjotteren"></div>
-      <div class="cloud-tag"><img src="images/enzovoorts.png" alt="enzovoorts" class="enz-img"></div>
-    </div>
+  <!-- SCATTERED WORDS -->
+  <div class="scattered-cloud" id="cloud">
+    <div class="scattered-word"><img src="images/knutselen.png" alt="knutselen"></div>
+    <div class="scattered-word"><img src="images/kabbelen.png" alt="kabbelen"></div>
+    <div class="scattered-word"><img src="images/wapperen.png" alt="wapperen"></div>
+    <div class="scattered-word"><img src="images/huppelen.png" alt="huppelen"></div>
+    <div class="scattered-word"><img src="images/flapperen.png" alt="flapperen"></div>
+    <div class="scattered-word"><img src="images/tjotteren.png" alt="tjotteren"></div>
+    <div class="scattered-word enz-img"><img src="images/enzovoorts.png" alt="enzovoorts"></div>
   </div>
 
-  
+  <!-- CENTER LOGO LINK -->
   <a href="main-page.html" class="center-logo" id="enter-btn">
     <img src="images/logo.png" alt="Enter Stichting Lezeren">
   </a>
@@ -136,93 +133,93 @@
 
 <script>
   // ==========================================
-  // 3D SPINNING WORD CLOUD LOGIC
+  // SCATTERING LOGIC (9-ZONE GRID + STRICT EDGE MARGINS)
   // ==========================================
   const container = document.getElementById('cloud');
-  const tags = Array.from(container.getElementsByClassName('cloud-tag'));
-  
-  const baseRadius = 350; 
-  const minRadius = 200; // The "hole" around the logo
-  let angleX = 0.005, angleY = 0.005; 
+  const words = Array.from(container.getElementsByClassName('scattered-word'));
 
-  // Distribute items on the sphere
-  const numTags = tags.length;
-  tags.forEach((tag, i) => {
-    const phi = Math.acos(-1 + (2 * i) / numTags);
-    const theta = Math.sqrt(numTags * Math.PI) * phi;
+  function scatterWords() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     
-    tag.x = baseRadius * Math.cos(theta) * Math.sin(phi);
-    tag.y = baseRadius * Math.sin(theta) * Math.sin(phi);
-    tag.z = baseRadius * Math.cos(phi);
-  });
+    // Divide screen into 3x3 grid (9 zones)
+    const zoneW = width / 3;
+    const zoneH = height / 3;
+    
+    let availableZones = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    availableZones.sort(() => Math.random() - 0.5);
 
-  function rotateCloud() {
-    // Get the exact center of the window
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+    // Define the off-center logo position (Must match the CSS percentages)
+    const isMobile = width < 768;
+    const logoX = isMobile ? (width * 0.5) : (width * 0.6);
+    const logoY = isMobile ? (height * 0.5) : (height * 0.55);
+    
+    // Safe distance from the logo to prevent text overlapping it
+    const logoRadius = isMobile ? 130 : 200;
+    
+    // Margin to keep words away from the very edge of the screen
+    const edgeMargin = 60; 
 
-    let currentRadiusMultiplier = 1;
-    if (window.innerWidth < 768) {
-      currentRadiusMultiplier = 0.65; 
-    } else if (window.innerWidth < 1024) {
-      currentRadiusMultiplier = 0.85; 
-    }
+    words.forEach((word) => {
+      let validPosition = false;
+      let attempts = 0;
+      let finalX, finalY;
 
-    // Rotate the 3D coordinates
-    tags.forEach(tag => {
-      const y1 = tag.y * Math.cos(angleX) - tag.z * Math.sin(angleX);
-      const z1 = tag.z * Math.cos(angleX) + tag.y * Math.sin(angleX);
-      tag.y = y1;
-      tag.z = z1;
+      while (!validPosition && attempts < 100) {
+        let zone = availableZones.length > 0 ? availableZones.pop() : Math.floor(Math.random() * 9);
+        
+        let col = zone % 3;
+        let row = Math.floor(zone / 3);
+        
+        // Calculate zone boundaries with the edge margin applied
+        let minX = (col * zoneW) + edgeMargin;
+        let maxX = (col * zoneW) + zoneW - edgeMargin;
+        let minY = (row * zoneH) + edgeMargin;
+        let maxY = (row * zoneH) + zoneH - edgeMargin;
 
-      const x2 = tag.x * Math.cos(angleY) - tag.z * Math.sin(angleY);
-      const z2 = tag.z * Math.cos(angleY) + tag.x * Math.sin(angleY);
-      tag.x = x2;
-      tag.z = z2;
-    });
+        // Ensure the zone is actually large enough to fit the margins
+        if (minX >= maxX || minY >= maxY) {
+            minX = col * zoneW;
+            maxX = (col * zoneW) + zoneW;
+            minY = row * zoneH;
+            maxY = (row * zoneH) + zoneH;
+        }
 
-    // Render (Project 3D to 2D)
-    tags.forEach(tag => {
-      const scaledX = tag.x * currentRadiusMultiplier;
-      const scaledY = tag.y * currentRadiusMultiplier;
-      const scaledZ = tag.z * currentRadiusMultiplier;
+        let x = Math.random() * (maxX - minX) + minX;
+        let y = Math.random() * (maxY - minY) + minY;
 
-      const scale = 700 / (700 - scaledZ); 
-      
-      let left = scaledX * scale;
-      let top = scaledY * scale;
-      
-      // ==========================================
-      // EXCLUSION ZONE (Push words out from the logo)
-      // ==========================================
-      const distanceFromCenter = Math.sqrt(left*left + top*top);
-      const exclusionZone = window.innerWidth < 768 ? minRadius * 0.6 : minRadius;
-
-      if (distanceFromCenter < exclusionZone) {
-        const angle = Math.atan2(top, left);
-        left = Math.cos(angle) * exclusionZone;
-        top = Math.sin(angle) * exclusionZone;
+        // Check distance from the OFF-CENTER logo
+        const distToLogo = Math.sqrt(Math.pow(x - logoX, 2) + Math.pow(y - logoY, 2));
+        
+        if (distToLogo > logoRadius) {
+          validPosition = true;
+          finalX = x;
+          finalY = y;
+        }
+        attempts++;
       }
 
-      // Final position: Center of screen + offset
-      const finalLeft = centerX + left;
-      const finalTop = centerY + top;
-      
-      // Apply transforms. 
-      // translate(-50%, -50%) ensures the image centers on its calculated coordinate.
-      tag.style.transform = `translate(-50%, -50%) translate(${finalLeft}px, ${finalTop}px) scale(${scale})`;
-      
-      tag.style.opacity = Math.max(0.2, scale - 0.3); 
-      tag.style.zIndex = Math.floor(scale * 100);
+      if (validPosition) {
+        word.style.left = `${finalX}px`;
+        word.style.top = `${finalY}px`;
+        word.style.opacity = '1';
+      } else {
+        word.style.opacity = '0';
+      }
     });
-
-    requestAnimationFrame(rotateCloud);
   }
 
-  // Start animation
-  if (container) {
-    setTimeout(rotateCloud, 50);
-  }
+  window.addEventListener('load', () => {
+    setTimeout(scatterWords, 100);
+  });
+
+  window.addEventListener('resize', () => {
+    words.forEach(w => w.style.transition = 'none');
+    scatterWords();
+    setTimeout(() => {
+      words.forEach(w => w.style.transition = 'top 0.5s ease, left 0.5s ease, opacity 0.5s ease');
+    }, 50);
+  });
 
   // ==========================================
   // PAGE TRANSITION LOGIC
